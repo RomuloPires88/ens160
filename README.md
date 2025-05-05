@@ -1,6 +1,3 @@
-# ENS160 MOX Gas Sensor
-Script for CO2 sensor
-
 # eCO₂ Sensor Logger with Real-Time Plotting
 
 This Python application interfaces with the **Adafruit ENS160** air quality sensor via I2C to monitor and log **eCO₂ (equivalent CO₂)** concentrations in real time. It includes a graphical interface using `matplotlib` with control buttons and keyboard shortcuts to define initial time markers, adjust environment parameters, save data, and more.
