@@ -60,7 +60,7 @@ ens.humidity_compensation = user_hum
 # Lists to store time and eCO2 values
 time_values = []
 eCO2_values = []
-#TVOC_values = [] # if uncomment this, add a script in save button
+TVOC_values = [] # if uncomment this, add a script in save button
 start_time = time.time()  # Capture the starting time
 marker_time = None # button
 collecting = True # Controls data collection
@@ -111,10 +111,10 @@ def save_event(event):
     try:
         with open(file_path, mode = 'w', newline = '') as file:
             writer = csv.writer(file)
-            writer.writerow(['Time (s)', 'eCO2 (ppm)']) # Header
-            for t, eco2 in zip(time_values, eCO2_values):
+            writer.writerow(['Time (s)', 'eCO2 (ppm)','TVOC (ppb)']) # Header
+            for t, eco2, tvoc in zip(time_values, eCO2_values, TVOC_values):
                 if t >= marker_time:
-                    writer.writerow([t - marker_time, eco2])
+                    writer.writerow([t - marker_time, eco2, tvoc])
         messagebox.showinfo("Save Successful", f"Data saved to {file_path}")
         print(f"Data saved to {file_path}")
     except Exception as e:
@@ -187,12 +187,12 @@ while running:
         # Capture the current time and eCO2 reading
         elapsed_time = time.time() - start_time
         eCO2 = ens.eCO2
-        #TVOC = ens.TVOC
+        TVOC = ens.TVOC
 
         # Append the current time and eCO2 value to the lists
         time_values.append(elapsed_time)
         eCO2_values.append(eCO2)
-        #TVOC_values.append(TVOC)
+        TVOC_values.append(TVOC)
 
         # Print the eCO2 value (optional)
         print(f"Time: {elapsed_time:.2f}s, eCO2 (ppm): {eCO2}")
@@ -200,7 +200,7 @@ while running:
     # Plot the graph
     ax.clear()
     ax.plot(time_values, eCO2_values, label = 'eCO2 (ppm)')
-    #ax.plot(time_values, TVOC_values, label = 'TVOC (ppb)')
+    ax.plot(time_values, TVOC_values, label = 'TVOC (ppb)')
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('ppm')
     ax.set_title('eCO2 vs Time')
