@@ -57,10 +57,10 @@ user_temp, user_hum = get_enviroment_conditions()
 ens.temperature_compensation = user_temp
 ens.humidity_compensation = user_hum
 
-# Lists to store time and eCO2 values
+# Lists to store time, eCO2 and TVOC values
 time_values = []
 eCO2_values = []
-TVOC_values = [] # if uncomment this, add a script in save button
+TVOC_values = [] 
 start_time = time.time()  # Capture the starting time
 marker_time = None # button
 collecting = True # Controls data collection
@@ -80,10 +80,11 @@ def marker_event(event):
     
 # Button: Restart Reading
 def restart_reading_event(event):
-    global collecting, time_values, eCO2_values, start_time, marker_time
+    global collecting, time_values, eCO2_values, TVOC_values, start_time, marker_time
     collecting = True
     time_values.clear()
     eCO2_values.clear()
+    TVOC_values.clear()
     start_time = time.time()
     marker_time = None
     ax.clear()  # Clear the plot when restarting
@@ -129,8 +130,8 @@ def ajust_env_event(event):
         ens.humidity_compensation = new_hum
         global user_temp, user_hum
         user_temp, user_hum = new_temp, new_hum
-        messagebox.showinfo("New enviroment conditions set", f"Temperature: {user_temp} ÂºC, Humidity: {user_hum} %")
-        print("New enviroment conditions set: T=", {user_temp}, "ÂºC, H=",{user_hum},"%")
+        messagebox.showinfo("New enviroment conditions set", f"Temperature: {user_temp} ºC, Humidity: {user_hum} %")
+        print("New enviroment conditions set: T=", {user_temp}, "ºC, H=",{user_hum},"%")
     except Exception as e:
         messagebox.showinfo("Error", f"Failed to update ambient conditions")
         print(f"Failed to update ambient conditions: {e}")
