@@ -1,4 +1,4 @@
-# eCO₂ Sensor Logger with Real-Time Plotting
+# eCO₂ and TCOV Sensor Logger with Real-Time Plotting
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
@@ -7,7 +7,7 @@ This Python application interfaces with the **Adafruit ENS160** air quality sens
 
 ## Features
 
-- 📊 Real-time plotting of eCO₂ data
+- 📊 Real-time plotting of eCO₂ and TVOC data
 - 🕒 Marker button or **spacebar shortcut** to define an initial reference time
 - 💾 Save data to CSV (starting from the initial time)
 - 🌡️ Manual input for temperature and humidity compensation
